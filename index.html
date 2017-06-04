@@ -3,14 +3,39 @@
 <head>
   <meta charset="utf-8">
   <title>Keyboard Layout Research</title>
+  <style>
+    .question {
+      width: 100%;
+      margin: 32px;
+      background-color: grey
+    }
+    .answer {
+      width: 100%;
+    }
+  </style>
+  <script>
+    event_log = [];
+    function logEvent(type) {
+      event_log.push({
+        type: type,
+        time: Performance.now()
+      })
+    }
+    function onsubmit() {
+      logEvent("submit")
+      document.getElementById("log").value = JSON.stringify(event_log);
+      document.getElementById("summary").value = JSON.stringify(getSummary(event_log));
+    }
+    function getSummary() {
+      return {
+        first_input_to_submit_ms: 15
+      }
+    }
+    logEvent("start");
+  </script>
 </head>
 <body>
-  <script>
-    function logEvent(type, data) {
-
-    }
-  </script>
-  <form>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdl3b0JqQPxCO-YV9lQH6gLD0nTOh0kkSoXFHFaCIDakwS8lg/formResponse" target="_self" method="POST" onsubmit="onsubmit">
     <div class="question">
       Please type "welcome" below
       <div class="answer"><input type="text" name="entry.1774757950" value=""></input></div>
@@ -23,10 +48,10 @@
       Please type "pa1ss2wo3rd4" below
       <div class="answer"><input type="text" name="entry.778886309" value=""></input></div>
     <div>
-    <input type="hidden" name="entry.1345513042"></input>
-    <input type="hidden" name="entry.858984254"></input>
+    <input type="hidden" id="log" name="entry.1345513042"></input>
+    <input type="hidden" id="summary" name="entry.858984254"></input>
     <div>
-      <input type="submit">Submit</input>
+      <input type="submit"></input>
     </div>
   </form>
 </body>
