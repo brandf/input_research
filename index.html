@@ -4,13 +4,16 @@
   <meta charset="utf-8">
   <title>Keyboard Layout Research</title>
   <style>
+    input {
+      width: 200px
+    }
     .question {
-      width: 100%;
-      margin: 32px;
-      background-color: grey
+      padding: 8px;
+      background-color: lightgrey;
+      margin-bottom: 16px;
     }
     .answer {
-      width: 100%;
+      padding: 8px;
     }
   </style>
   <script>
@@ -18,13 +21,13 @@
     function logEvent(type) {
       event_log.push({
         type: type,
-        time: Performance.now()
+        time: performance.now()
       })
     }
-    function onsubmit() {
+    function handlesubmit() {
       logEvent("submit")
-      document.getElementById("log").value = JSON.stringify(event_log);
-      document.getElementById("summary").value = JSON.stringify(getSummary(event_log));
+      document.getElementById("log").value = JSON.stringify(event_log, undefined, "  ");
+      document.getElementById("summary").value = JSON.stringify(getSummary(event_log), undefined, "  ");
     }
     function getSummary() {
       return {
@@ -35,19 +38,31 @@
   </script>
 </head>
 <body>
-  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdl3b0JqQPxCO-YV9lQH6gLD0nTOh0kkSoXFHFaCIDakwS8lg/formResponse" target="_self" method="POST" onsubmit="onsubmit">
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdl3b0JqQPxCO-YV9lQH6gLD0nTOh0kkSoXFHFaCIDakwS8lg/formResponse" target="_self" method="POST" onsubmit="handlesubmit()">
+
     <div class="question">
-      Please type "welcome" below
-      <div class="answer"><input type="text" name="entry.1774757950" value=""></input></div>
-    <div>
+      Please type "hello"
+      <div class="answer">
+        <select name="entry.1029536509" required>
+        </select>
+      </div>
+    </div>
     <div class="question">
-      Please type "John Smith" below (match case)
-      <div class="answer"><input type="text" name="entry.1833463999" value=""></input></div>
-    <div>
+      Please type "hello"
+      <div class="answer"><input type="text" name="entry.1774757950" value="" pattern="hello" required></input></div>
+    </div>
     <div class="question">
-      Please type "pa1ss2wo3rd4" below
-      <div class="answer"><input type="text" name="entry.778886309" value=""></input></div>
-    <div>
+      Please type "John Smith" (case sensitive)
+      <div class="answer"><input type="text" name="entry.1833463999" value="" pattern="John Smith" required></input></div>
+    </div>
+    <div class="question">
+      Please type "pa1ss2wo3rd4".
+      <div class="answer"><input type="text" name="entry.778886309" value="" pattern="pa1ss2wo3rd4" required></input></div>
+    </div>
+    <div class="question">
+      Please type your name.
+      <div class="answer"><input type="text" name="entry.736420603" value="" required></input></div>
+    </div>
     <input type="hidden" id="log" name="entry.1345513042"></input>
     <input type="hidden" id="summary" name="entry.858984254"></input>
     <div>

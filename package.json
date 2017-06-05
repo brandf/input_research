@@ -1,0 +1,22 @@
+{
+  "name": "input_research",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ws -n -p 8008"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandf/input_research.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandf/input_research/issues"
+  },
+  "homepage": "https://github.com/brandf/input_research#readme",
+  "devDependencies": {
+    "local-web-server": "^1.2.7"
+  }
+}
