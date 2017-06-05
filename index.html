@@ -11,6 +11,19 @@
       padding: 8px;
       background-color: lightgrey;
       margin-bottom: 16px;
+      font-size: 18px;
+    }
+    .instructions {
+      padding: 8px;
+      background-color: lightcyan;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .setup {
+      padding: 8px;
+      background-color: lightcyan;
+      font-size: 24px;
+      margin-bottom: 16px;
     }
     .answer {
       padding: 8px;
@@ -63,9 +76,13 @@
 </head>
 <body>
   <form action="https://docs.google.com/forms/d/e/1FAIpQLSdl3b0JqQPxCO-YV9lQH6gLD0nTOh0kkSoXFHFaCIDakwS8lg/formResponse" target="_self" method="POST" onsubmit="handlesubmit()">
-    <div class="question">
-      Please ensure keyboard layout set to one of the following:
+    <div class="instructions">
+      <div class="setup">
+        Setup:
+      </div>
       <div class="answer">
+        1) Please select the keyboard layout to test:
+        <div>
         <select name="entry.1029536509" required>
           <option value="Default">Default</option>
           <option value="Compact 48">Compact 48</option>
@@ -78,7 +95,21 @@
           <option value="Medium 32">Medium 32</option>
           <option value="Wide 32">Wide 32</option>
         </select>
-      </div><input type="text"></input>
+        </div>
+      </div>
+      <div class="answer">
+        2) Tap the input below
+      </div>
+      <div class="answer">
+        3) Tap the 'world' icon on the keyboard
+      </div>
+      <div class="answer">
+        4) select the corresponding keyboard layout (c_48 = Compact 48)
+        <div><input type="text"></input></div>
+      </div>
+      <div class="answer">
+        5) Fill out the form below
+      </div>
     </div>
     <div class="question">
       Please type "hello"
