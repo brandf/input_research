@@ -18,11 +18,14 @@
   </style>
   <script>
     event_log = [];
-    function logEvent(type) {
+    function logEvent(type, data) {
       event_log.push({
         type: type,
         time: performance.now()
-      })
+      });
+      if (data) {
+        event_log[event_log.length - 1].data = data;
+      }
     }
     function handlesubmit() {
       logEvent("submit")
@@ -30,10 +33,31 @@
       document.getElementById("summary").value = JSON.stringify(getSummary(event_log), undefined, "  ");
     }
     function getSummary() {
-      return {
-        first_input_to_submit_ms: 15
+      const summary = {};
+      const firstTimes = {};
+      const endTimes = {};
+      for (var i = 0; i < event_log.length; ++i) {
+        const entry = event_log[i];
+        if (!firstTimes[entry.type]) {
+          firstTimes[entry.type] = entry.time;
+        }
+        endTimes[entry.type] = entry.time;
       }
+
+      summary.helloMs = endTimes.hello - firstTimes.hello;
+      summary.johnSmithMs = endTimes.johnsmith - firstTimes.johnsmith;
+      summary.passwordMs = endTimes.password - firstTimes.password;
+      summary.nameMs = endTimes.name - firstTimes.name;
+      summary.allMs = endTimes.submit - firstTimes.start;
+
+      return summary;
     }
+    function onKeyPress(name, e) {
+      logEvent(name, {
+        key: e.key
+      });
+    }
+
     logEvent("start");
   </script>
 </head>
@@ -58,19 +82,19 @@
     </div>
     <div class="question">
       Please type "hello"
-      <div class="answer"><input type="text" name="entry.1774757950" value="" pattern="hello" required></input></div>
+      <div class="answer"><input type="text" name="entry.1774757950" value="" pattern="hello" onkeypress="onKeyPress('hello', arguments[0])" required></input></div>
     </div>
     <div class="question">
       Please type "John Smith" (case sensitive)
-      <div class="answer"><input type="text" name="entry.1833463999" value="" pattern="John Smith" required></input></div>
+      <div class="answer"><input type="text" name="entry.1833463999" value="" pattern="John Smith" onkeypress="onKeyPress('johnsmith', arguments[0])" required></input></div>
     </div>
     <div class="question">
       Please type "pa1ss2wo3rd4".
-      <div class="answer"><input type="text" name="entry.778886309" value="" pattern="pa1ss2wo3rd4" required></input></div>
+      <div class="answer"><input type="text" name="entry.778886309" value="" pattern="pa1ss2wo3rd4" onkeypress="onKeyPress('password', arguments[0])" required></input></div>
     </div>
     <div class="question">
       Please type your name.
-      <div class="answer"><input type="text" name="entry.736420603" value="" required></input></div>
+      <div class="answer"><input type="text" name="entry.736420603" value="" onkeypress="onKeyPress('name', arguments[0])" required></input></div>
     </div>
     <input type="hidden" id="log" name="entry.1345513042"></input>
     <input type="hidden" id="summary" name="entry.858984254"></input>
