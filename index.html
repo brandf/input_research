@@ -2,6 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="cache-control" content="no-cache" />
+  <meta name="expires" content="0" />
+  <meta name="pragma" content="no-cache" />
   <title>Keyboard Layout Research</title>
   <style>
     input {
@@ -27,6 +30,10 @@
     }
     .answer {
       padding: 8px;
+    }
+    .hidden {
+      visibility: collapse;
+      height: 0px;
     }
   </style>
   <script>
@@ -71,17 +78,44 @@
       });
     }
 
+    function resetInputs() {
+      var i = 1;
+      var step = document.getElementById("step" + i + "_input");
+      do {
+        step.value = "";
+        step = document.getElementById("step" + (++i) + "_input");
+      } while (step)
+    }
+
+    function setStep(num) {
+      var i = 1;
+      var step = document.getElementById("step" + i);
+      // hide all
+      do {
+        step.classList.add("hidden");
+        step = document.getElementById("step" + (++i));
+      } while (step)
+
+      // unhide the one specified
+      document.getElementById("step" + num).classList.remove("hidden");
+    }
+
+    function onLoad() {
+      resetInputs();
+      setStep(1);
+    }
+
     logEvent("start");
   </script>
 </head>
-<body>
+<body onload="onLoad();">
   <form action="https://docs.google.com/forms/d/e/1FAIpQLSdl3b0JqQPxCO-YV9lQH6gLD0nTOh0kkSoXFHFaCIDakwS8lg/formResponse" target="_self" method="POST" onsubmit="handlesubmit()">
-    <div class="instructions">
+    <div id="step1" class="instructions">
       <div class="setup">
         Setup:
       </div>
       <div class="answer">
-        1) Please select the keyboard layout to test:
+        1) Please select the keyboard layout for this run:
         <div>
         <select name="entry.1029536509" required>
           <option value="Default">Default</option>
@@ -98,39 +132,63 @@
         </div>
       </div>
       <div class="answer">
-        2) Tap the input below
+        2) Tap the input box below to open the keyboard.
       </div>
       <div class="answer">
-        3) Tap the 'world' icon on the keyboard
+        3) Tap the 'world' icon on the keyboard to ppen the layout selection.
       </div>
       <div class="answer">
-        4) select the corresponding keyboard layout (c_48 = Compact 48)
-        <div><input type="text"></input></div>
+        4) Select the corresponding keyboard layout (c_48 = Compact 48)
+        <div><input id="step1_input" type="text"></input></div>
       </div>
       <div class="answer">
-        5) Fill out the form below
+        5) Hit next to begin answering questions.
+      </div>
+      <div>
+        <input type="button" onclick="setStep(2)" value="Next"></input>
       </div>
     </div>
-    <div class="question">
-      Please type "hello"
-      <div class="answer"><input type="text" name="entry.1774757950" value="" pattern="hello" oninput="onInput('hello', arguments[0])" required></input></div>
+    <div id="step2" class="hidden">
+      <div class="question">
+        Please type "hello"
+        <div class="answer"><input id="step2_input" type="text" name="entry.1774757950" value="" pattern="hello" oninput="onInput('hello', arguments[0])" required></input></div>
+      </div>
+      <div>
+        <input type="button" onclick="setStep(1)" value="Previous"></input>
+        <input type="button" onclick="setStep(3)" value="Next"></input>
+      </div>
     </div>
-    <div class="question">
-      Please type "John Smith" (case sensitive)
-      <div class="answer"><input type="text" name="entry.1833463999" value="" pattern="John Smith" oninput="onInput('johnsmith', arguments[0])" required></input></div>
+    <div id="step3" class="hidden">
+      <div class="question">
+        Please type "John Smith" (case sensitive)
+        <div class="answer"><input id="step3_input" type="text" name="entry.1833463999" value="" pattern="John Smith" oninput="onInput('johnsmith', arguments[0])" required></input></div>
+      </div>
+      <div>
+        <input type="button" onclick="setStep(2)" value="Previous"></input>
+        <input type="button" onclick="setStep(4)" value="Next"></input>
+      </div>
     </div>
-    <div class="question">
-      Please type "pa/ss@wo.rd4"
-      <div class="answer"><input type="text" name="entry.778886309" value="" pattern="pa\/ss@wo\.rd4" oninput="onInput('password', arguments[0])" required></input></div>
+    <div id="step4" class="hidden">
+      <div class="question">
+        Please type "pa/ss@wo.rd4"
+        <div class="answer"><input id="step4_input" type="text" name="entry.778886309" value="" pattern="pa\/ss@wo\.rd4" oninput="onInput('password', arguments[0])" required></input></div>
+      </div>
+      <div>
+        <input type="button" onclick="setStep(3)" value="Previous"></input>
+        <input type="button" onclick="setStep(5)" value="Next"></input>
+      </div>
     </div>
-    <div class="question">
-      Please type your name
-      <div class="answer"><input type="text" name="entry.736420603" value="" oninput="onInput('name', arguments[0])" required></input></div>
-    </div>
-    <input type="hidden" id="log" name="entry.1345513042"></input>
-    <input type="hidden" id="summary" name="entry.858984254"></input>
-    <div>
-      <input type="submit"></input>
+    <div id="step5" class="hidden">
+      <div class="question">
+        Please type your name
+        <div class="answer"><input id="step5_input" type="text" name="entry.736420603" value="" oninput="onInput('name', arguments[0])" required></input></div>
+      </div>
+      <input type="hidden" id="log" name="entry.1345513042"></input>
+      <input type="hidden" id="summary" name="entry.858984254"></input>
+      <div>
+        <input type="button" onclick="setStep(4)" value="Previous"></input>
+        <input type="submit"></input>
+      </div>
     </div>
   </form>
 </body>
