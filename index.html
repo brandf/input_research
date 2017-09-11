@@ -102,6 +102,7 @@
     }
 
     function onLoad() {
+      document.querySelectorAll("select").forEach((s) => { s.selectedIndex = 0; });
       resetInputs();
       setStep(1);
     }
