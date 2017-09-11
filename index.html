@@ -64,7 +64,7 @@
         endTimes[entry.type] = entry.time;
       }
 
-      summary.helloMs = endTimes.hello - firstTimes.hello;
+      summary.foxMs = endTimes.fox - firstTimes.fox;
       summary.johnSmithMs = endTimes.johnsmith - firstTimes.johnsmith;
       summary.passwordMs = endTimes.password - firstTimes.password;
       summary.nameMs = endTimes.name - firstTimes.name;
@@ -98,6 +98,7 @@
 
       // unhide the one specified
       document.getElementById("step" + num).classList.remove("hidden");
+      logEvent("setStep " + num);
     }
 
     function onLoad() {
@@ -117,7 +118,7 @@
       <div class="answer">
         1) Please select the keyboard layout for this run:
         <div>
-        <select name="entry.1029536509" required>
+        <select name="entry.1029536509">
           <option value="Default">Default</option>
           <option value="Compact 48">Compact 48</option>
           <option value="Medium 48">Medium 48</option>
@@ -128,6 +129,15 @@
           <option value="Compact 32">Compact 32</option>
           <option value="Medium 32">Medium 32</option>
           <option value="Wide 32">Wide 32</option>
+        </select>
+        </div>
+      </div>
+      <div class="answer">
+        2) Please select the round:
+        <div>
+        <select name="entry.1592105223">
+          <option value="Round 1">Round 1</option>
+          <option value="Round 2">Round 2</option>
         </select>
         </div>
       </div>
@@ -150,8 +160,8 @@
     </div>
     <div id="step2" class="hidden">
       <div class="question">
-        Please type "hello"
-        <div class="answer"><input id="step2_input" type="text" name="entry.1774757950" value="" pattern="hello" oninput="onInput('hello', arguments[0])" required></input></div>
+        Please type "The quick brown fox jumps over a lazy dog"
+        <div class="answer"><input id="step2_input" type="text" name="entry.1774757950" value="" oninput="onInput('fox', arguments[0])"></input></div>
       </div>
       <div>
         <input type="button" onclick="setStep(1)" value="Previous"></input>
@@ -161,7 +171,7 @@
     <div id="step3" class="hidden">
       <div class="question">
         Please type "John Smith" (case sensitive)
-        <div class="answer"><input id="step3_input" type="text" name="entry.1833463999" value="" pattern="John Smith" oninput="onInput('johnsmith', arguments[0])" required></input></div>
+        <div class="answer"><input id="step3_input" type="text" name="entry.1833463999" value="" oninput="onInput('johnsmith', arguments[0])"></input></div>
       </div>
       <div>
         <input type="button" onclick="setStep(2)" value="Previous"></input>
@@ -171,7 +181,7 @@
     <div id="step4" class="hidden">
       <div class="question">
         Please type "pa/ss@wo.rd4"
-        <div class="answer"><input id="step4_input" type="text" name="entry.778886309" value="" pattern="pa\/ss@wo\.rd4" oninput="onInput('password', arguments[0])" required></input></div>
+        <div class="answer"><input id="step4_input" type="text" name="entry.778886309" value="" oninput="onInput('password', arguments[0])"></input></div>
       </div>
       <div>
         <input type="button" onclick="setStep(3)" value="Previous"></input>
@@ -180,8 +190,8 @@
     </div>
     <div id="step5" class="hidden">
       <div class="question">
-        Please type your name
-        <div class="answer"><input id="step5_input" type="text" name="entry.736420603" value="" oninput="onInput('name', arguments[0])" required></input></div>
+        Please type your first and last name.
+        <div class="answer"><input id="step5_input" type="text" name="entry.736420603" value="" oninput="onInput('name', arguments[0])"></input></div>
       </div>
       <input type="hidden" id="log" name="entry.1345513042"></input>
       <input type="hidden" id="summary" name="entry.858984254"></input>
