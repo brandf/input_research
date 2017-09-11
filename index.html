@@ -106,11 +106,19 @@
       setStep(1);
     }
 
+    function blurOnEnter(e) {
+      if (e.keyCode == 13) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.target.blur();
+      }
+    }
+
     logEvent("start");
   </script>
 </head>
 <body onload="onLoad();">
-  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdl3b0JqQPxCO-YV9lQH6gLD0nTOh0kkSoXFHFaCIDakwS8lg/formResponse" target="_self" method="POST" onsubmit="handlesubmit()">
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdl3b0JqQPxCO-YV9lQH6gLD0nTOh0kkSoXFHFaCIDakwS8lg/formResponse" target="_self" method="POST" onsubmit="handlesubmit()" onkeypress="blurOnEnter(arguments[0])">
     <div id="step1" class="instructions">
       <div class="setup">
         Setup:
@@ -149,19 +157,19 @@
       </div>
       <div class="answer">
         4) Select the corresponding keyboard layout (c_48 = Compact 48)
-        <div><input id="step1_input" type="text"></input></div>
+        <div><input id="step1_input" type="text" onkeypress="blurOnEnter(arguments[0])"></input></div>
       </div>
       <div class="answer">
         5) Hit next to begin answering questions.
       </div>
       <div>
-        <input type="button" onclick="setStep(2)" value="Next"></input>
+        <input id="" type="button" onclick="setStep(2)" value="Next"></input>
       </div>
     </div>
     <div id="step2" class="hidden">
       <div class="question">
         Please type "The quick brown fox jumps over a lazy dog"
-        <div class="answer"><input id="step2_input" type="text" name="entry.1774757950" value="" oninput="onInput('fox', arguments[0])"></input></div>
+        <div class="answer"><input id="step2_input" type="text" name="entry.1774757950" value="" oninput="onInput('fox', arguments[0])" onkeypress="blurOnEnter(arguments[0])"></input></div>
       </div>
       <div>
         <input type="button" onclick="setStep(1)" value="Previous"></input>
@@ -171,7 +179,7 @@
     <div id="step3" class="hidden">
       <div class="question">
         Please type "John Smith" (case sensitive)
-        <div class="answer"><input id="step3_input" type="text" name="entry.1833463999" value="" oninput="onInput('johnsmith', arguments[0])"></input></div>
+        <div class="answer"><input id="step3_input" type="text" name="entry.1833463999" value="" oninput="onInput('johnsmith', arguments[0])" onkeypress="blurOnEnter(arguments[0])"></input></div>
       </div>
       <div>
         <input type="button" onclick="setStep(2)" value="Previous"></input>
@@ -181,7 +189,7 @@
     <div id="step4" class="hidden">
       <div class="question">
         Please type "pa/ss@wo.rd4"
-        <div class="answer"><input id="step4_input" type="text" name="entry.778886309" value="" oninput="onInput('password', arguments[0])"></input></div>
+        <div class="answer"><input id="step4_input" type="text" name="entry.778886309" value="" oninput="onInput('password', arguments[0])" onkeypress="blurOnEnter(arguments[0])"></input></div>
       </div>
       <div>
         <input type="button" onclick="setStep(3)" value="Previous"></input>
@@ -191,7 +199,7 @@
     <div id="step5" class="hidden">
       <div class="question">
         Please type your first and last name.
-        <div class="answer"><input id="step5_input" type="text" name="entry.736420603" value="" oninput="onInput('name', arguments[0])"></input></div>
+        <div class="answer"><input id="step5_input" type="text" name="entry.736420603" value="" oninput="onInput('name', arguments[0])" onkeypress="blurOnEnter(arguments[0])"></input></div>
       </div>
       <input type="hidden" id="log" name="entry.1345513042"></input>
       <input type="hidden" id="summary" name="entry.858984254"></input>
